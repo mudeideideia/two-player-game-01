@@ -6,7 +6,7 @@ class Element {
       this.y0 = y0;
       this.color = color
     }
-    setOrigin(x0, y0) {  
+    setOrigin(x0, y0) {
         this.x0 = x0;
         this.y0 = y0;
     }
@@ -15,7 +15,7 @@ class Element {
         this.color = color 
     }
 
-    addOnScreen(){
+    toJSON(){
         return {
             type: null,
             x0:this.x0,
@@ -41,7 +41,7 @@ class Rectangle extends Element {
         this.width = width;
     }
     
-    addOnScreen(){
+    toJSON(){
         return {
             type:'rectangle',
             x0:this.x0,

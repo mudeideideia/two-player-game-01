@@ -1,14 +1,17 @@
 'use strict';
 
-class Screen {
+class MyCanvas {
     constructor(height = 600, width = 600){
         this.canvas = document.createElement('canvas')
         this.canvas.width = width
         this.canvas.height = height
         this.ctx = this.canvas.getContext('2d');
+        this.x = width*0.5
+        this.y = height*0.5
+        this.addEvents()
     }
 
-    insertOnElement(element){
+    insertOnHTML(element){
         if(element !== undefined) {
             element.appendChild(this.canvas)
         } else {
@@ -16,8 +19,15 @@ class Screen {
             
         }
     }
+    clearCanvas() {
+        this.ctx.fillStyle = 'white'
+        this.ctx.fillRect( 0, 0,
+            this.canvas.width,
+            this.canvas.height
+        )
+    }
 
-    insertOnScreen(json){
+    insertOnCanvas(json){
         this.ctx.fillStyle = json.color 
         switch (json.type) {
             case 'rectangle':
@@ -35,6 +45,25 @@ class Screen {
                 break;
         }
     }
+
+
+    mousePosition() {
+        return {
+            x:this.x,
+            y:this.y,
+        }
+    }
+
+    addEvents(){
+        window.onload = () => {
+            this.rect = this.canvas.getBoundingClientRect()
+        }
+        this.canvas.addEventListener('mousemove', e => {
+            this.x = e.clientX - this.rect.left;
+            this.y = this.canvas.height - (e.clientY - this.rect.top);
+        });
+    }
+
 }
 
 // canvas.style.border = "1px solid #000"
