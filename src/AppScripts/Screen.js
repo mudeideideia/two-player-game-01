@@ -62,6 +62,19 @@ class MyCanvas {
             this.x = e.clientX - this.rect.left;
             this.y = this.canvas.height - (e.clientY - this.rect.top);
         });
+        this.canvas.addEventListener('touchstart', e => {
+            const clientX = e.touches[0].clientX;
+            const clientY = e.touches[0].clientY;
+            this.x = clientX - this.rect.left;
+            this.y = this.canvas.height - (clientY - this.rect.top);
+        });
+        this.canvas.addEventListener('touchmove', e => {
+            const clientX = e.touches[0].clientX;
+            const clientY = e.touches[0].clientY;
+            
+            this.x = clientX - this.rect.left;
+            this.y = this.canvas.height - (clientY - this.rect.top);
+        });
     }
 
 }
